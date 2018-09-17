@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- 콘솔 로그 -->
+    <appender name="infoConsole" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%5p] %d{hh\:mm s} (%F\:%L) %c{1}.%M \: %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="dailyout" class="org.apache.log4j.DailyRollingFileAppender">
+        <!-- 이것은 날짜별로  로그를 남김. 파일명.확장자.DatePattern으로 정의 함-->
+        <param name="file" value="c:\\zzz\\dailyout.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyMMdd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%t> [%d{yyyy-MM-dd HH:mm:ss}] [%c{1}] [%L] [%p] %m %n"/>
+        </layout>
+    </appender>
+
+    <logger name="org.zerock.dao" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="dailyout" />
+        <appender-ref ref="infoConsole" />
+    </logger>
+
+    <!-- root 설정 -->
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="infoConsole" />
+        <appender-ref ref="dailyout" />
+    </root>
+
+</log4j:configuration>
+
